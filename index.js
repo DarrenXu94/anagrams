@@ -13,8 +13,9 @@ function createRegex(patternArray) {
 }
 
 class Game {
-  constructor(board) {
+  constructor(board, dupesAllowed = true) {
     this.board = board; // 4x4 array
+    this.dupesAllowed = dupesAllowed;
   }
 
   // chars is an array of len 4
@@ -29,7 +30,29 @@ class Game {
     return word;
   }
 
+  hasDupes(board) {
+    // loop through board
+    // if there are any duplicates return false
+    // else return true
+    const horizontalWords = board.map((row) => row.join(""));
+    const verticalWords = board[0].map((_, i) =>
+      board.map((row) => row[i]).join("")
+    );
+
+    const allWords = [...horizontalWords, ...verticalWords].filter(
+      (word) => word.length === 4
+    );
+    const allWordsSet = new Set(allWords);
+    return allWords.length !== allWordsSet.size;
+  }
+
   run() {
+    if (!this.dupesAllowed) {
+      if (this.hasDupes(this.board)) {
+        console.log("Board has duplicates");
+        return;
+      }
+    }
     const res = this.calculate(this.board);
     if (res) {
       this.printBoard(res);
@@ -108,5 +131,6 @@ class Game {
   }
 }
 
-const game = new Game(boards.testBoard);
+const game = new Game(boards.testBoard, false);
+// const game = new Game(boards.unknownBoard);
 game.run();

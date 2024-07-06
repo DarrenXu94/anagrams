@@ -29,4 +29,10 @@ module.exports = {
     ["N", "E", "A", "R"],
     ["E", "A", "R", "L"],
   ],
+  unknownBoard: [
+    ["A", "L", "A", "N"],
+    ["R", null, null, null],
+    ["E", null, null, null],
+    ["A", null, null, null],
+  ],
 };
