@@ -15,41 +15,6 @@ function createRegex(patternArray) {
 class Game {
   constructor(board) {
     this.board = board; // 4x4 array
-    this.originalBoard = board;
-  }
-
-  validateWordsInBoard(board) {
-    // loop through the board and validate that the words are in the dictionary
-    // return true if all words are valid
-
-    // check all rows valid
-    for (let i = 0; i < board.length; i++) {
-      let word = "";
-      for (let j = 0; j < board[i].length; j++) {
-        if (board[i][j] !== null) {
-          word += board[i][j];
-        }
-      }
-      if (!words.includes(word)) {
-        return false;
-      }
-    }
-
-    // check all cols valid
-    for (let i = 0; i < board.length; i++) {
-      let word = "";
-      for (let j = 0; j < board[i].length; j++) {
-        if (board[j][i] !== null) {
-          word += board[j][i];
-        }
-      }
-
-      if (!words.includes(word)) {
-        return false;
-      }
-    }
-
-    return true;
   }
 
   // chars is an array of len 4
@@ -91,9 +56,10 @@ class Game {
   }
 
   calculate(board) {
+    // first check all vertical cols if filled in are valid
     // loop through the board
     // for every null, try and find a 4 letter word that fits the existing letters
-    // should return true if valid board
+    // should return the valid board if valid else return false
 
     const isBoardValidVertical = this.checkIfBoardValidVertical(board);
     if (!isBoardValidVertical) return false;
@@ -124,11 +90,7 @@ class Game {
         }
         return false;
       }
-
-      // need to stop the for loop?
-      // re-calculate the board with new word in row
     }
-    // this.printBoard(newBoard);
     return newBoard;
   }
 
@@ -148,6 +110,3 @@ class Game {
 
 const game = new Game(boards.testBoard);
 game.run();
-// game.printBoard();
-// const res = game.validateWordsInBoard(game.board);
-// console.log(res);
