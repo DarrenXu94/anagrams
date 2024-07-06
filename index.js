@@ -147,10 +147,10 @@ const rl = readline.createInterface({
 });
 
 const questions = [
-  "Please enter the first input: ",
-  "Please enter the second input: ",
-  "Please enter the third input: ",
-  "Please enter the fourth input: ",
+  "Please enter the first row, enter a space for blank: ",
+  "Please enter the second row, enter a space for blank: ",
+  "Please enter the third row, enter a space for blank: ",
+  "Please enter the fourth row, enter a space for blank: ",
 ];
 
 let answers = [];
