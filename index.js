@@ -1,3 +1,5 @@
+const readline = require("readline");
+
 const boards = require("./boards.js");
 
 const words = require("./weights.json");
@@ -10,6 +12,10 @@ function createRegex(patternArray) {
   // Create regex with the pattern
   const regex = new RegExp(`^${regexPattern}$`);
   return regex;
+}
+
+function isLetter(str) {
+  return str.length === 1 && str.match(/[a-z]/i);
 }
 
 class Game {
@@ -131,6 +137,46 @@ class Game {
   }
 }
 
-const game = new Game(boards.testBoard, false);
+// const game = new Game(boards.testBoard, false);
 // const game = new Game(boards.unknownBoard);
-game.run();
+// game.run();
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+const questions = [
+  "Please enter the first input: ",
+  "Please enter the second input: ",
+  "Please enter the third input: ",
+  "Please enter the fourth input: ",
+];
+
+let answers = [];
+
+const askQuestion = (index) => {
+  if (index === questions.length) {
+    rl.close();
+    const game = new Game(answers);
+    game.run();
+    return;
+  }
+
+  rl.question(questions[index], (answer) => {
+    if (answer.length !== 4) {
+      console.log("Please enter a 4 letter word");
+      askQuestion(index);
+      return;
+    }
+    // answers.push(answer.toUpperCase());
+    const capsAnswer = answer.toUpperCase();
+    const splitAnswers = capsAnswer
+      .split("")
+      .map((char) => (isLetter(char) ? char : null));
+    answers.push(splitAnswers);
+    askQuestion(index + 1);
+  });
+};
+
+askQuestion(0);
