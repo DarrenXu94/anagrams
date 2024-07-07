@@ -35,4 +35,10 @@ module.exports = {
     ["E", null, null, null],
     ["A", null, null, null],
   ],
+  badBoard: [
+    ["A", "L", "A", "N"],
+    ["R", "E", "A", "R"],
+    ["E", "A", "R", null],
+    ["A", "L", "A", "N"],
+  ],
 };
