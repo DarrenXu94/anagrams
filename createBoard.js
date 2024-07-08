@@ -46,6 +46,10 @@ function generate(seed) {
   const game = new Game(input);
   const finishedBoard = game.run();
 
+  if (!finishedBoard) {
+    return generate(seed + 1);
+  }
+
   // console.log(finishedBoard);
   return finishedBoard;
 }
