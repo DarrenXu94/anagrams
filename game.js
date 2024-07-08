@@ -31,7 +31,7 @@ class Game {
     );
 
     const allWords = [...horizontalWords, ...verticalWords].filter(
-      (word) => word.length === 4
+      (word) => word.length === this.board.length
     );
     const allWordsSet = new Set(allWords);
     return allWords.length !== allWordsSet.size;
@@ -61,7 +61,7 @@ class Game {
           word += board[j][i];
         }
       }
-      if (word.length === 4 && !words.includes(word)) {
+      if (word.length === this.board.length && !words.includes(word)) {
         return false;
       }
     }
@@ -119,11 +119,16 @@ class Game {
       console.log(row);
     }
     console.log("\n");
+    console.timeEnd("game");
   }
 }
 
 module.exports = { Game };
 
+console.time("game");
 // const game = new Game(boards.badBoard);
 // const game = new Game(boards.unknownBoard);
-// game.run();
+// const game = new Game(boards.easyBoard);
+// const game = new Game(boards.halfBoard);
+const game = new Game(boards.testBoard);
+game.run();
