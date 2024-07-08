@@ -48,6 +48,7 @@ class Game {
     if (res) {
       this.printBoard(res);
       console.log("Board is valid");
+      return res;
     } else {
       console.log("Board is invalid");
     }
@@ -130,5 +131,5 @@ console.time("game");
 // const game = new Game(boards.unknownBoard);
 // const game = new Game(boards.easyBoard);
 // const game = new Game(boards.halfBoard);
-const game = new Game(boards.testBoard);
-game.run();
+// const game = new Game(boards.testBoard);
+// game.run();
